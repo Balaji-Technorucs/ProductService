@@ -15,9 +15,11 @@ jobs:
       contents: read
 
     steps:
+      # -------------------- Checkout code --------------------
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # -------------------- Azure Login --------------------
       - name: Azure Login
         uses: azure/login@v2
         with:
@@ -25,30 +27,32 @@ jobs:
           tenant-id: ${{ secrets.PRODUCTSERVICES_AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.PRODUCTSERVICES_AZURE_SUBSCRIPTION_ID }}
 
-      # -------------------- OrderService --------------------
+      # -------------------- Deploy OrderService --------------------
       - name: Deploy OrderService
         uses: azure/container-apps-deploy-action@v2
         with:
           azureCredentials: ${{ secrets.AZURE_CREDENTIALS }}
-
           resourceGroup: ms
           containerAppEnvironment: test
           containerAppName: orderservice
-
           appSourcePath: OrderService
           dockerfilePath: DockerFile
           targetPort: 80
+          registryUrl: ${{ secrets.ACR_SERVER }}
+          registryUsername: ${{ secrets.ACR_USERNAME }}
+          registryPassword: ${{ secrets.ACR_PASSWORD }}
 
-      # -------------------- ProductMicroservice --------------------
+      # -------------------- Deploy ProductMicroservice --------------------
       - name: Deploy ProductMicroservice
         uses: azure/container-apps-deploy-action@v2
         with:
           azureCredentials: ${{ secrets.AZURE_CREDENTIALS }}
-
           resourceGroup: ms
           containerAppEnvironment: test
           containerAppName: productservice
-
           appSourcePath: ProductMicroservice
           dockerfilePath: DockerFile
           targetPort: 80
+          registryUrl: ${{ secrets.ACR_SERVER }}
+          registryUsername: ${{ secrets.ACR_USERNAME }}
+          registryPassword: ${{ secrets.ACR_PASSWORD }}
