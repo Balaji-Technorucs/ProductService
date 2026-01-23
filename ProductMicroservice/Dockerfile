@@ -5,9 +5,10 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-COPY ProductMicroservice/ ./ProductMicroservice/
-WORKDIR /src/ProductMicroservice
+# Copy everything from build context (ProductMicroservice folder)
+COPY . .
 
+WORKDIR /src
 RUN dotnet restore "ProductMicroservice.csproj"
 RUN dotnet publish "ProductMicroservice.csproj" -c Release -o /app/publish
 
