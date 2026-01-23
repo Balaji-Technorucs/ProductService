@@ -4,7 +4,10 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY . .
+
+COPY ProductMicroservice/ ./ProductMicroservice/
+WORKDIR /src/ProductMicroservice
+
 RUN dotnet restore "ProductMicroservice.csproj"
 RUN dotnet publish "ProductMicroservice.csproj" -c Release -o /app/publish
 
