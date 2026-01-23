@@ -36,7 +36,7 @@ jobs:
           containerAppEnvironment: test
           containerAppName: orderservice
           appSourcePath: OrderService
-          dockerfilePath: DockerFile
+          dockerfilePath: Dockerfile
           targetPort: 80
           registryUrl: ${{ secrets.ACR_SERVER }}
           registryUsername: ${{ secrets.ACR_USERNAME }}
@@ -51,8 +51,9 @@ jobs:
           containerAppEnvironment: test
           containerAppName: productservice
           appSourcePath: ProductMicroservice
-          dockerfilePath: DockerFile
+          dockerfilePath: Dockerfile
           targetPort: 80
           registryUrl: ${{ secrets.ACR_SERVER }}
           registryUsername: ${{ secrets.ACR_USERNAME }}
           registryPassword: ${{ secrets.ACR_PASSWORD }}
+
