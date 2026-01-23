@@ -5,10 +5,10 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-# copy ONLY OrderService folder
-COPY OrderService/ ./OrderService/
-WORKDIR /src/OrderService
+# Copy everything from build context (OrderService folder)
+COPY . .
 
+WORKDIR /src
 RUN dotnet restore "OrderService.csproj"
 RUN dotnet publish "OrderService.csproj" -c Release -o /app/publish
 
