@@ -14,7 +14,7 @@ namespace ReportingService.Controllers
             _service = service;
         }
 
-        [HttpGet("/health")]
+        [HttpGet("health")]
         public IActionResult HealthCheck()
         {
             return Ok("Reporting Service is working.");
